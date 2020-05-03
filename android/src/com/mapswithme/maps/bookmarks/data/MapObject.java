@@ -8,6 +8,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 //import com.mapswithme.maps.ads.Banner;
 //import com.mapswithme.maps.ads.LocalAdInfo;
+import com.mapswithme.maps.ads.Banner;
+import com.mapswithme.maps.ads.LocalAdInfo;
 import com.mapswithme.maps.routing.RoutePointInfo;
 import com.mapswithme.maps.search.HotelsFilter;
 import com.mapswithme.maps.search.Popularity;
@@ -83,14 +85,14 @@ public class MapObject implements PopularityProvider, ShareableInfoProvider,
   private String mAddress;
   private Metadata mMetadata;
   private String mApiId;
-//  @Nullable
-//  private List<Banner> mBanners;
+  @Nullable
+  private List<Banner> mBanners;
   @Nullable
   private List<TaxiType> mReachableByTaxiTypes;
   @Nullable
   private String mBookingSearchUrl;
-//  @Nullable
-//  private LocalAdInfo mLocalAdInfo;
+  @Nullable
+  private LocalAdInfo mLocalAdInfo;
   @Nullable
   private RoutePointInfo mRoutePointInfo;
   @OpeningMode
@@ -115,9 +117,9 @@ public class MapObject implements PopularityProvider, ShareableInfoProvider,
 
   public MapObject(@NonNull FeatureId featureId, @MapObjectType int mapObjectType, String title,
                    @Nullable String secondaryTitle, String subtitle, String address,
-                   double lat, double lon, String apiId,
+                   double lat, double lon, String apiId, @Nullable Banner[] banners,
                    @Nullable int[] types, @Nullable String bookingSearchUrl,
-                   @Nullable RoutePointInfo routePointInfo,
+                   @Nullable LocalAdInfo localAdInfo, @Nullable RoutePointInfo routePointInfo,
                    @OpeningMode int openingMode, boolean shouldShowUGC, boolean canBeRated,
                    boolean canBeReviewed, @Nullable UGC.Rating[] ratings,
                    @Nullable HotelsFilter.HotelType hotelType, @PriceFilterView.PriceDef int priceRate,
@@ -125,17 +127,17 @@ public class MapObject implements PopularityProvider, ShareableInfoProvider,
                    @Nullable String[] rawTypes)
   {
     this(featureId, mapObjectType, title, secondaryTitle,
-         subtitle, address, lat, lon, new Metadata(), apiId,
-         types, bookingSearchUrl, routePointInfo, openingMode, shouldShowUGC,
-         canBeRated, canBeReviewed, ratings, hotelType, priceRate, popularity, description,
-         roadWarningType, rawTypes);
+            subtitle, address, lat, lon, new Metadata(), apiId, banners,
+            types, bookingSearchUrl, localAdInfo, routePointInfo, openingMode, shouldShowUGC,
+            canBeRated, canBeReviewed, ratings, hotelType, priceRate, popularity, description,
+            roadWarningType, rawTypes);
   }
 
   public MapObject(@NonNull FeatureId featureId, @MapObjectType int mapObjectType,
                    String title, @Nullable String secondaryTitle, String subtitle, String address,
                    double lat, double lon, Metadata metadata, String apiId,
-                    @Nullable int[] taxiTypes,
-                   @Nullable String bookingSearchUrl,
+                   @Nullable Banner[] banners, @Nullable int[] taxiTypes,
+                   @Nullable String bookingSearchUrl, @Nullable LocalAdInfo localAdInfo,
                    @Nullable RoutePointInfo routePointInfo, @OpeningMode int openingMode,
                    boolean shouldShowUGC, boolean canBeRated, boolean canBeReviewed,
                    @Nullable UGC.Rating[] ratings, @Nullable HotelsFilter.HotelType hotelType,
@@ -153,7 +155,7 @@ public class MapObject implements PopularityProvider, ShareableInfoProvider,
     mMetadata = metadata;
     mApiId = apiId;
     mBookingSearchUrl = bookingSearchUrl;
-//    mLocalAdInfo = localAdInfo;
+    mLocalAdInfo = localAdInfo;
     mRoutePointInfo = routePointInfo;
     mOpeningMode = openingMode;
     mShouldShowUGC = shouldShowUGC;
@@ -161,8 +163,8 @@ public class MapObject implements PopularityProvider, ShareableInfoProvider,
     mCanBeReviewed = canBeReviewed;
     mPopularity = popularity;
     mDescription = description;
-//    if (banners != null)
-//      mBanners = new ArrayList<>(Arrays.asList(banners));
+    if (banners != null)
+      mBanners = new ArrayList<>(Arrays.asList(banners));
     if (taxiTypes != null)
     {
       mReachableByTaxiTypes = new ArrayList<>();
@@ -181,36 +183,37 @@ public class MapObject implements PopularityProvider, ShareableInfoProvider,
   protected MapObject(@MapObjectType int type, Parcel source)
   {
     //noinspection ResourceType
+    //noinspection ResourceType
     this(source.readParcelable(FeatureId.class.getClassLoader()), // FeatureId
-         type, // MapObjectType
-         source.readString(), // Title
-         source.readString(), // SecondaryTitle
-         source.readString(), // Subtitle
-         source.readString(), // Address
-         source.readDouble(), // Lat
-         source.readDouble(), // Lon
-         source.readParcelable(Metadata.class.getClassLoader()),
-         source.readString(), // ApiId;
-//         null, // mBanners
-         null, // mReachableByTaxiTypes
-         source.readString(), // BookingSearchUrl
-//         source.readParcelable(LocalAdInfo.class.getClassLoader()), // LocalAdInfo
-         source.readParcelable(RoutePointInfo.class.getClassLoader()), // RoutePointInfo
-         source.readInt(), // mOpeningMode
-         source.readInt() == 1, // mShouldShowUGC
-         source.readInt() == 1, // mCanBeRated;
-         source.readInt() == 1, // mCanBeReviewed
-         null, // mRatings
-         source.readParcelable(HotelsFilter.HotelType.class.getClassLoader()), // mHotelType
+            type, // MapObjectType
+            source.readString(), // Title
+            source.readString(), // SecondaryTitle
+            source.readString(), // Subtitle
+            source.readString(), // Address
+            source.readDouble(), // Lat
+            source.readDouble(), // Lon
+            source.readParcelable(Metadata.class.getClassLoader()),
+            source.readString(), // ApiId;
+            null, // mBanners
+            null, // mReachableByTaxiTypes
+            source.readString(), // BookingSearchUrl
+            source.readParcelable(LocalAdInfo.class.getClassLoader()), // LocalAdInfo
+            source.readParcelable(RoutePointInfo.class.getClassLoader()), // RoutePointInfo
+            source.readInt(), // mOpeningMode
+            source.readInt() == 1, // mShouldShowUGC
+            source.readInt() == 1, // mCanBeRated;
+            source.readInt() == 1, // mCanBeReviewed
+            null, // mRatings
+            source.readParcelable(HotelsFilter.HotelType.class.getClassLoader()), // mHotelType
 
-         source.readInt(), // mPriceRate
-         source.readParcelable(Popularity.class.getClassLoader()),
-         source.readString(),
-         source.readInt(),
-         null // mRawTypes
-        );
+            source.readInt(), // mPriceRate
+            source.readParcelable(Popularity.class.getClassLoader()),
+            source.readString(),
+            source.readInt(),
+            null // mRawTypes
+    );
 
-//    mBanners = readBanners(source);
+    mBanners = readBanners(source);
     mReachableByTaxiTypes = readTaxiTypes(source);
     mRatings = readRatings(source);
     mRawTypes = readRawTypes(source);
@@ -221,21 +224,21 @@ public class MapObject implements PopularityProvider, ShareableInfoProvider,
                                           @NonNull String title, @NonNull String subtitle, double lat, double lon)
   {
     return new MapObject(featureId, mapObjectType, title,
-                         "", subtitle, "", lat, lon, "",
-                         null, "",null, OPENING_MODE_PREVIEW,
-                         false /* shouldShowUGC */, false /* canBeRated */, false /* canBeReviewed */,
-                         null /* ratings */, null /* mHotelType */,
-                         PriceFilterView.UNDEFINED, Popularity.defaultInstance(), "",
-                         RoadWarningMarkType.UNKNOWN.ordinal(), new String[0]);
+            "", subtitle, "", lat, lon, "", null,
+            null, "", null, null, OPENING_MODE_PREVIEW,
+            false /* shouldShowUGC */, false /* canBeRated */, false /* canBeReviewed */,
+            null /* ratings */, null /* mHotelType */,
+            PriceFilterView.UNDEFINED, Popularity.defaultInstance(), "",
+            RoadWarningMarkType.UNKNOWN.ordinal(), new String[0]);
   }
 
-//  @Nullable
-//  private static List<Banner> readBanners(@NonNull Parcel source)
-//  {
-//    List<Banner> banners = new ArrayList<>();
-//    source.readTypedList(banners, Banner.CREATOR);
-//    return banners.isEmpty() ? null : banners;
-//  }
+  @Nullable
+  private static List<Banner> readBanners(@NonNull Parcel source)
+  {
+    List<Banner> banners = new ArrayList<>();
+    source.readTypedList(banners, Banner.CREATOR);
+    return banners.isEmpty() ? null : banners;
+  }
 
   @Nullable
   private static ArrayList<UGC.Rating> readRatings(@NonNull Parcel source)

@@ -12,7 +12,7 @@ import com.google.android.gms.gcm.GcmListenerService;
 import com.mapswithme.maps.BuildConfig;
 import com.mapswithme.util.log.Logger;
 import com.mapswithme.util.log.LoggerFactory;
-import com.pushwoosh.internal.utils.NotificationRegistrarHelper;
+//import com.pushwoosh.internal.utils.NotificationRegistrarHelper;
 
 // It's temporary class, it may be deleted along with Pushwoosh sdk.
 // The base of this code is taken from https://www.pushwoosh.com/docs/gcm-integration-legacy.
@@ -35,8 +35,8 @@ public class GCMListenerRouterService extends GcmListenerService
     data.putString("from", from);
 
     String pwProjectId = getPWProjectId(getApplicationContext());
-    if (!TextUtils.isEmpty(pwProjectId) && pwProjectId.contains(from))
-      NotificationRegistrarHelper.handleMessage(data);
+//    if (!TextUtils.isEmpty(pwProjectId) && pwProjectId.contains(from))
+//      NotificationRegistrarHelper.handleMessage(data);
   }
 
   @Nullable

@@ -9,8 +9,8 @@ import com.mapswithme.maps.PrivateVariables;
 import com.mapswithme.util.ConnectionState;
 import com.mapswithme.util.concurrency.ThreadPool;
 import com.mapswithme.util.concurrency.UiThread;
-import com.my.target.nativeads.NativeAppwallAd;
-import com.my.target.nativeads.banners.NativeAppwallBanner;
+//import com.my.target.nativeads.NativeAppwallAd;
+//import com.my.target.nativeads.banners.NativeAppwallBanner;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
@@ -30,8 +30,8 @@ public final class MytargetHelper
 
   private static final int TIMEOUT = 1000;
 
-  @Nullable
-  private NativeAppwallAd mShowcase;
+//  @Nullable
+//  private NativeAppwallAd mShowcase;
   private boolean mCancelled;
 
   public interface Listener<T>
@@ -119,66 +119,66 @@ public final class MytargetHelper
     return false;
   }
 
-  public void loadShowcase(final @NonNull Listener<List<NativeAppwallBanner>> listener, Activity activity)
-  {
-    if (mShowcase == null)
-      mShowcase = loadAds(listener, activity);
-  }
-
-  public void handleBannersShow(@NonNull List<NativeAppwallBanner> banners)
-  {
-    if (mShowcase != null)
-      mShowcase.handleBannersShow(banners);
-  }
-
-  private NativeAppwallAd loadAds(final @NonNull Listener<List<NativeAppwallBanner>> listener, Activity activity)
-  {
-    NativeAppwallAd res = new NativeAppwallAd(PrivateVariables.myTargetSlot(), activity);
-    res.setListener(new NativeAppwallAd.AppwallAdListener()
-    {
-      @Override
-      public void onLoad(NativeAppwallAd ad)
-      {
-        if (mCancelled)
-          return;
-
-        if (ad.getBanners().isEmpty())
-          listener.onNoAds();
-        else
-          listener.onDataReady(ad.getBanners());
-      }
-
-      @Override
-      public void onNoAd(String s, NativeAppwallAd nativeAppwallAd)
-      {
-        listener.onNoAds();
-      }
-
-      @Override
-      public void onClick(NativeAppwallBanner nativeAppwallBanner, NativeAppwallAd nativeAppwallAd) {}
-
-      @Override
-      public void onDisplay(@NonNull NativeAppwallAd nativeAppwallAd)
-      {
-        /* Do nothing */
-      }
-
-      @Override
-      public void onDismiss(@NonNull NativeAppwallAd nativeAppwallAd)
-      {
-        /* Do nothing */
-      }
-    });
-
-    res.load();
-    return res;
-  }
-
-  public void onBannerClick(@NonNull NativeAppwallBanner banner)
-  {
-    if (mShowcase != null)
-      mShowcase.handleBannerClick(banner);
-  }
+//  public void loadShowcase(final @NonNull Listener<List<NativeAppwallBanner>> listener, Activity activity)
+//  {
+//    if (mShowcase == null)
+//      mShowcase = loadAds(listener, activity);
+//  }
+//
+//  public void handleBannersShow(@NonNull List<NativeAppwallBanner> banners)
+//  {
+//    if (mShowcase != null)
+//      mShowcase.handleBannersShow(banners);
+//  }
+//
+//  private NativeAppwallAd loadAds(final @NonNull Listener<List<NativeAppwallBanner>> listener, Activity activity)
+//  {
+//    NativeAppwallAd res = new NativeAppwallAd(PrivateVariables.myTargetSlot(), activity);
+//    res.setListener(new NativeAppwallAd.AppwallAdListener()
+//    {
+//      @Override
+//      public void onLoad(NativeAppwallAd ad)
+//      {
+//        if (mCancelled)
+//          return;
+//
+//        if (ad.getBanners().isEmpty())
+//          listener.onNoAds();
+//        else
+//          listener.onDataReady(ad.getBanners());
+//      }
+//
+//      @Override
+//      public void onNoAd(String s, NativeAppwallAd nativeAppwallAd)
+//      {
+//        listener.onNoAds();
+//      }
+//
+//      @Override
+//      public void onClick(NativeAppwallBanner nativeAppwallBanner, NativeAppwallAd nativeAppwallAd) {}
+//
+//      @Override
+//      public void onDisplay(@NonNull NativeAppwallAd nativeAppwallAd)
+//      {
+//        /* Do nothing */
+//      }
+//
+//      @Override
+//      public void onDismiss(@NonNull NativeAppwallAd nativeAppwallAd)
+//      {
+//        /* Do nothing */
+//      }
+//    });
+//
+//    res.load();
+//    return res;
+//  }
+//
+//  public void onBannerClick(@NonNull NativeAppwallBanner banner)
+//  {
+//    if (mShowcase != null)
+//      mShowcase.handleBannerClick(banner);
+//  }
 
   public static boolean isShowcaseSwitchedOnServer()
   {

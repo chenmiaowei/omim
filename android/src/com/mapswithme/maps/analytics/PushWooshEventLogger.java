@@ -10,17 +10,17 @@ import com.mapswithme.maps.BuildConfig;
 import com.mapswithme.util.UiUtils;
 import com.mapswithme.util.log.Logger;
 import com.mapswithme.util.log.LoggerFactory;
-import com.mapswithme.util.statistics.PushwooshHelper;
-import com.pushwoosh.Pushwoosh;
-import com.pushwoosh.notification.PushwooshNotificationSettings;
+//import com.mapswithme.util.statistics.PushwooshHelper;
+//import com.pushwoosh.Pushwoosh;
+//import com.pushwoosh.notification.PushwooshNotificationSettings;
 
 class PushWooshEventLogger extends DefaultEventLogger
 {
   private static final Logger LOGGER = LoggerFactory.INSTANCE.getLogger(LoggerFactory.Type.MISC);
   private static final String PW_EMPTY_APP_ID = "XXXXX";
 
-  @Nullable
-  private PushwooshHelper mPushwooshHelper;
+//  @Nullable
+//  private PushwooshHelper mPushwooshHelper;
 
   PushWooshEventLogger(@NonNull Application application)
   {
@@ -37,10 +37,10 @@ class PushWooshEventLogger extends DefaultEventLogger
 
       @ColorInt
       int color = UiUtils.getNotificationColor(getApplication());
-      PushwooshNotificationSettings.setNotificationIconBackgroundColor(color);
-      Pushwoosh pushManager = Pushwoosh.getInstance();
-      pushManager.registerForPushNotifications();
-      mPushwooshHelper = new PushwooshHelper();
+//      PushwooshNotificationSettings.setNotificationIconBackgroundColor(color);
+//      Pushwoosh pushManager = Pushwoosh.getInstance();
+//      pushManager.registerForPushNotifications();
+//      mPushwooshHelper = new PushwooshHelper();
     }
     catch(Exception e)
     {
@@ -52,7 +52,7 @@ class PushWooshEventLogger extends DefaultEventLogger
   public void sendTags(@NonNull String tag, @Nullable String[] params)
   {
     super.sendTags(tag, params);
-    if (mPushwooshHelper != null)
-      mPushwooshHelper.sendTags(tag, params);
+//    if (mPushwooshHelper != null)
+//      mPushwooshHelper.sendTags(tag, params);
   }
 }

@@ -13,7 +13,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentManager;
-import com.mapswithme.maps.ads.Banner;
+//import com.mapswithme.maps.ads.Banner;
 import com.mapswithme.maps.analytics.AdvertisingObserver;
 import com.mapswithme.maps.analytics.ExternalLibrariesMediator;
 import com.mapswithme.maps.base.BaseActivity;
@@ -36,8 +36,8 @@ import com.mapswithme.util.UiUtils;
 import com.mapswithme.util.concurrency.UiThread;
 import com.mapswithme.util.log.Logger;
 import com.mapswithme.util.log.LoggerFactory;
-import com.mapswithme.util.statistics.PushwooshHelper;
-import com.my.tracker.MyTracker;
+//import com.mapswithme.util.statistics.PushwooshHelper;
+//import com.my.tracker.MyTracker;
 
 public class SplashActivity extends AppCompatActivity
     implements BaseNewsFragment.NewsDialogListener, BaseActivity,
@@ -125,7 +125,7 @@ public class SplashActivity extends AppCompatActivity
       {
         LOGGER.i(TAG, "Limit ad tracking disabled, sensitive tracking initialized");
         mediator.initSensitiveData();
-        MyTracker.trackLaunchManually(SplashActivity.this);
+//        MyTracker.trackLaunchManually(SplashActivity.this);
       }
       else
       {
@@ -137,7 +137,7 @@ public class SplashActivity extends AppCompatActivity
       if (app.arePlatformAndCoreInitialized() && mediator.isLimitAdTrackingEnabled())
       {
         LOGGER.i(TAG, "Limit ad tracking enabled, rb banners disabled.");
-        mediator.disableAdProvider(Banner.Type.TYPE_RB);
+//        mediator.disableAdProvider(Banner.Type.TYPE_RB);
       }
 
 //    Run delayed task because resumeDialogs() must see the actual value of mCanceled flag,
@@ -504,7 +504,7 @@ public class SplashActivity extends AppCompatActivity
     if (!success || !app.isFirstLaunch())
       return;
 
-    PushwooshHelper.nativeProcessFirstLaunch();
+//    PushwooshHelper.nativeProcessFirstLaunch();
     LocationHelper.INSTANCE.onEnteredIntoFirstRun();
     if (!LocationHelper.INSTANCE.isActive())
       LocationHelper.INSTANCE.start();

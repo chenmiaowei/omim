@@ -32,7 +32,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import com.mapswithme.maps.Framework.PlacePageActivationListener;
 import com.mapswithme.maps.activity.CustomNavigateUpListener;
-import com.mapswithme.maps.ads.LikesManager;
+//import com.mapswithme.maps.ads.LikesManager;
 import com.mapswithme.maps.api.ParsedMwmRequest;
 import com.mapswithme.maps.auth.PassportAuthDialogFragment;
 import com.mapswithme.maps.background.AppBackgroundTracker;
@@ -1413,22 +1413,22 @@ public class MwmActivity extends BaseMwmFragmentActivity
     super.onResumeFragments();
     RoutingController.get().restore();
 
-    if (!LikesManager.INSTANCE.isNewUser() && Counters.isShowReviewForOldUser())
-    {
-      LikesManager.INSTANCE.showRateDialogForOldUser(this);
-      Counters.setShowReviewForOldUser(false);
-    }
-    else
-    {
-      LikesManager.INSTANCE.showDialogs(this);
-    }
+//    if (!LikesManager.INSTANCE.isNewUser() && Counters.isShowReviewForOldUser())
+//    {
+//      LikesManager.INSTANCE.showRateDialogForOldUser(this);
+//      Counters.setShowReviewForOldUser(false);
+//    }
+//    else
+//    {
+//      LikesManager.INSTANCE.showDialogs(this);
+//    }
   }
 
   @Override
   protected void onPause()
   {
     TtsPlayer.INSTANCE.stop();
-    LikesManager.INSTANCE.cancelDialogs();
+//    LikesManager.INSTANCE.cancelDialogs();
     if (mOnmapDownloader != null)
       mOnmapDownloader.onPause();
     mPlacePageController.onActivityPaused(this);

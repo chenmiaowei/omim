@@ -18,12 +18,12 @@
 extern jclass g_mapObjectClazz;
 extern jclass g_featureIdClazz;
 extern jclass g_bookmarkClazz;
-extern jclass g_myTrackerClazz;
+//extern jclass g_myTrackerClazz;
 extern jclass g_httpClientClazz;
 extern jclass g_httpParamsClazz;
 extern jclass g_platformSocketClazz;
 extern jclass g_utilsClazz;
-extern jclass g_bannerClazz;
+//extern jclass g_bannerClazz;
 extern jclass g_ratingClazz;
 extern jclass g_loggerFactoryClazz;
 extern jclass g_keyValueClazz;

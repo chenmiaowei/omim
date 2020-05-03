@@ -7,7 +7,7 @@ import com.google.android.gms.iid.InstanceID;
 import com.google.android.gms.iid.InstanceIDListenerService;
 import com.mapswithme.util.log.Logger;
 import com.mapswithme.util.log.LoggerFactory;
-import com.pushwoosh.PushwooshFcmHelper;
+//import com.pushwoosh.PushwooshFcmHelper;
 
 import java.io.IOException;
 
@@ -34,7 +34,7 @@ public class GcmInstanceIDRouterListenerService extends InstanceIDListenerServic
   private void onTokenRefreshInternal() throws IOException
   {    
     String token = getRefreshedToken();
-    PushwooshFcmHelper.onTokenRefresh(this, token);
+//    PushwooshFcmHelper.onTokenRefresh(this, token);
   }
 
   @Nullable

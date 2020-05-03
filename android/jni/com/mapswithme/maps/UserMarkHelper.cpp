@@ -27,13 +27,13 @@ void InjectMetadata(JNIEnv * env, jclass const clazz, jobject const mapObject, f
   }
 }
 
-jobject CreateBanner(JNIEnv * env, std::string const & id, jint type)
-{
-  static jmethodID const bannerCtorId =
-      jni::GetConstructorID(env, g_bannerClazz, "(Ljava/lang/String;I)V");
-  jni::TScopedLocalRef idRef(env, jni::ToJavaString(env, id));
-  return env->NewObject(g_bannerClazz, bannerCtorId, idRef.get(), type);
-}
+//jobject CreateBanner(JNIEnv * env, std::string const & id, jint type)
+//{
+//  static jmethodID const bannerCtorId =
+//      jni::GetConstructorID(env, g_bannerClazz, "(Ljava/lang/String;I)V");
+//  jni::TScopedLocalRef idRef(env, jni::ToJavaString(env, id));
+//  return env->NewObject(g_bannerClazz, bannerCtorId, idRef.get(), type);
+//}
 
 jobject CreateRating(JNIEnv * env, std::string const & name)
 {
@@ -237,8 +237,8 @@ jobject CreateMapObject(JNIEnv * env, place_page::Info const & info)
 {
   jni::TScopedLocalObjectArrayRef jbanners(env, nullptr);
   auto const banners = info.GetBanners();
-  if (!banners.empty())
-    jbanners.reset(ToBannersArray(env, banners));
+//  if (!banners.empty())
+//    jbanners.reset(ToBannersArray(env, banners));
 
   jni::TScopedLocalObjectArrayRef jratings(env, ToRatingArray(env, info.GetRatingCategories()));
 
@@ -301,13 +301,13 @@ jobject CreateMapObject(JNIEnv * env, place_page::Info const & info)
       info.GetDescription(), info.GetRoadType(), jrawTypes.get());
 }
 
-jobjectArray ToBannersArray(JNIEnv * env, std::vector<ads::Banner> const & banners)
-{
-  return jni::ToJavaArray(env, g_bannerClazz, banners,
-                          [](JNIEnv * env, ads::Banner const & item) {
-                            return CreateBanner(env, item.m_value, static_cast<jint>(item.m_type));
-                          });
-}
+//jobjectArray ToBannersArray(JNIEnv * env, std::vector<ads::Banner> const & banners)
+//{
+//  return jni::ToJavaArray(env, g_bannerClazz, banners,
+//                          [](JNIEnv * env, ads::Banner const & item) {
+//                            return CreateBanner(env, item.m_value, static_cast<jint>(item.m_type));
+//                          });
+//}
 
 jobjectArray ToRatingArray(JNIEnv * env, std::vector<std::string> const & ratingCategories)
 {

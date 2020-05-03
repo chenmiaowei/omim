@@ -17,10 +17,10 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GestureDetectorCompat;
 import com.mapswithme.maps.Framework;
 import com.mapswithme.maps.R;
-import com.mapswithme.maps.ads.CompoundNativeAdLoader;
-import com.mapswithme.maps.ads.DefaultAdTracker;
-import com.mapswithme.maps.ads.Factory;
-import com.mapswithme.maps.ads.MwmNativeAd;
+//import com.mapswithme.maps.ads.CompoundNativeAdLoader;
+//import com.mapswithme.maps.ads.DefaultAdTracker;
+//import com.mapswithme.maps.ads.Factory;
+//import com.mapswithme.maps.ads.MwmNativeAd;
 import com.mapswithme.maps.bookmarks.data.MapObject;
 import com.mapswithme.maps.bookmarks.data.RoadWarningMarkType;
 import com.mapswithme.maps.location.LocationHelper;
@@ -39,7 +39,7 @@ import java.util.Objects;
 public class RichPlacePageController implements PlacePageController, LocationListener,
                                                 View.OnLayoutChangeListener,
                                                 BannerController.BannerStateRequester,
-                                                BannerController.BannerStateListener,
+//                                                BannerController.BannerStateListener,
                                                 Closable
 {
   private static final float ANCHOR_RATIO = 0.3f;
@@ -148,34 +148,35 @@ public class RichPlacePageController implements PlacePageController, LocationLis
     int lastTop = mCurrentTop;
     mCurrentTop = mPlacePage.getTop();
 
-    if (!mBannerController.hasAd())
-      return;
-
-    int bannerMaxY = calculateBannerMaxY();
-    int bannerMinY = calculateBannerMinY();
-    int maxDistance = Math.abs(bannerMaxY - bannerMinY);
-    int yDistance = Math.abs(mCurrentTop - bannerMinY);
-    float ratio = (float) yDistance / maxDistance;
-    mBannerRatio = ratio;
-
-    if (ratio >= 1)
-    {
-      mBannerController.zoomOut(1);
-      mBannerController.open();
-      return;
-    }
-
-    if (ratio == 0)
-    {
-      mBannerController.zoomIn(ratio);
-      mBannerController.close();
-      return;
-    }
-
-    if (mCurrentTop < lastTop)
-      mBannerController.zoomOut(ratio);
-    else
-      mBannerController.zoomIn(ratio);
+    return;
+//    if (!mBannerController.hasAd())
+//      return;
+//
+//    int bannerMaxY = calculateBannerMaxY();
+//    int bannerMinY = calculateBannerMinY();
+//    int maxDistance = Math.abs(bannerMaxY - bannerMinY);
+//    int yDistance = Math.abs(mCurrentTop - bannerMinY);
+//    float ratio = (float) yDistance / maxDistance;
+//    mBannerRatio = ratio;
+//
+//    if (ratio >= 1)
+//    {
+//      mBannerController.zoomOut(1);
+//      mBannerController.open();
+//      return;
+//    }
+//
+//    if (ratio == 0)
+//    {
+//      mBannerController.zoomIn(ratio);
+//      mBannerController.close();
+//      return;
+//    }
+//
+//    if (mCurrentTop < lastTop)
+//      mBannerController.zoomOut(ratio);
+//    else
+//      mBannerController.zoomIn(ratio);
   }
 
   private int calculateBannerMaxY()
@@ -225,11 +226,11 @@ public class RichPlacePageController implements PlacePageController, LocationLis
     mPlacePage.addClosable(this);
     mPlacePage.setRoutingModeListener(mRoutingModeListener);
     ViewGroup bannerContainer = mPlacePage.findViewById(R.id.banner_container);
-    DefaultAdTracker tracker = new DefaultAdTracker();
-    CompoundNativeAdLoader loader = Factory.createCompoundLoader(tracker,
-                                                                 tracker);
-    mBannerController = new BannerController(bannerContainer, loader, tracker,
-                                             mPurchaseControllerProvider, this, this);
+//    DefaultAdTracker tracker = new DefaultAdTracker();
+//    CompoundNativeAdLoader loader = Factory.createCompoundLoader(tracker,
+//                                                                 tracker);
+    mBannerController = new BannerController(bannerContainer,
+                                             mPurchaseControllerProvider, this);
 
     mButtonsLayout = activity.findViewById(R.id.pp_buttons_layout);
     ViewGroup buttons = mButtonsLayout.findViewById(R.id.container);
@@ -273,7 +274,7 @@ public class RichPlacePageController implements PlacePageController, LocationLis
 
     mToolbar.setTitle(object.getTitle());
     mPlacePageTracker.setMapObject(object);
-    Framework.logLocalAdsEvent(Framework.LocalAdsEventType.LOCAL_ADS_EVENT_OPEN_INFO, object);
+//    Framework.logLocalAdsEvent(Framework.LocalAdsEventType.LOCAL_ADS_EVENT_OPEN_INFO, object);
   }
 
   private void showBanner(@NonNull MapObject object, NetworkPolicy policy)
@@ -281,7 +282,7 @@ public class RichPlacePageController implements PlacePageController, LocationLis
     boolean canShowBanner = object.getMapObjectType() != MapObject.MY_POSITION
                             && policy.canUseNetwork()
                             && object.getRoadWarningMarkType() == RoadWarningMarkType.UNKNOWN;
-    mBannerController.updateData(canShowBanner ? object.getBanners() : null);
+//    mBannerController.updateData(canShowBanner ? object.getBanners() : null);
   }
 
   private void openPlacePage()
@@ -549,17 +550,17 @@ public class RichPlacePageController implements PlacePageController, LocationLis
     return BannerController.BannerState.PREVIEW;
   }
 
-  @Override
-  public void onBannerDetails(@NonNull MwmNativeAd ad)
-  {
-    mPlacePageTracker.onBannerDetails(ad);
-  }
-
-  @Override
-  public void onBannerPreview(@NonNull MwmNativeAd ad)
-  {
-    mPlacePageTracker.onBannerPreview(ad);
-  }
+//  @Override
+//  public void onBannerDetails(@NonNull MwmNativeAd ad)
+//  {
+//    mPlacePageTracker.onBannerDetails(ad);
+//  }
+//
+//  @Override
+//  public void onBannerPreview(@NonNull MwmNativeAd ad)
+//  {
+//    mPlacePageTracker.onBannerPreview(ad);
+//  }
 
   @Override
   public void closePlacePage()

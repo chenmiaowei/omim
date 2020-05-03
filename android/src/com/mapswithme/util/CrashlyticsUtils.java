@@ -2,7 +2,7 @@ package com.mapswithme.util;
 
 import androidx.annotation.NonNull;
 
-import com.crashlytics.android.Crashlytics;
+//import com.crashlytics.android.Crashlytics;
 import com.mapswithme.maps.MwmApplication;
 
 public final class CrashlyticsUtils
@@ -12,7 +12,7 @@ public final class CrashlyticsUtils
     if (!checkCrashlytics())
       return;
 
-    Crashlytics.logException(exception);
+//    Crashlytics.logException(exception);
   }
 
   public static void log(int priority, @NonNull String tag, @NonNull String msg)
@@ -20,7 +20,7 @@ public final class CrashlyticsUtils
     if (!checkCrashlytics())
       return;
 
-    Crashlytics.log(priority, tag, msg);
+//    Crashlytics.log(priority, tag, msg);
   }
 
   private static boolean checkCrashlytics()

@@ -8,9 +8,9 @@ import androidx.annotation.Nullable;
 
 import java.util.Locale;
 
-import com.facebook.FacebookSdk;
-import com.facebook.share.model.ShareLinkContent;
-import com.facebook.share.widget.ShareDialog;
+//import com.facebook.FacebookSdk;
+//import com.facebook.share.model.ShareLinkContent;
+//import com.facebook.share.widget.ShareDialog;
 import com.mapswithme.util.UiUtils;
 
 public class ViralEditorShareable extends BaseShareable
@@ -70,15 +70,15 @@ public class ViralEditorShareable extends BaseShareable
 
   private void shareFacebook()
   {
-    FacebookSdk.sdkInitialize(getActivity());
-    ShareDialog shareDialog = new ShareDialog(getActivity());
-    if (ShareDialog.canShow(ShareLinkContent.class))
-    {
-      ShareLinkContent linkContent = new ShareLinkContent.Builder()
-                                         .setContentUrl(Uri.parse(FACEBOOK_SHARE_URL))
-                                         .build();
-
-      shareDialog.show(linkContent);
-    }
+//    FacebookSdk.sdkInitialize(getActivity());
+//    ShareDialog shareDialog = new ShareDialog(getActivity());
+//    if (ShareDialog.canShow(ShareLinkContent.class))
+//    {
+//      ShareLinkContent linkContent = new ShareLinkContent.Builder()
+//                                         .setContentUrl(Uri.parse(FACEBOOK_SHARE_URL))
+//                                         .build();
+//
+//      shareDialog.show(linkContent);
+//    }
   }
 }

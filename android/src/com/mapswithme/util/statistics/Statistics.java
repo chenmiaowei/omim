@@ -12,14 +12,14 @@ import androidx.annotation.IntDef;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import com.android.billingclient.api.BillingClient;
-import com.facebook.ads.AdError;
-import com.facebook.appevents.AppEventsLogger;
+//import com.facebook.ads.AdError;
+//import com.facebook.appevents.AppEventsLogger;
 import com.mapswithme.maps.BuildConfig;
 import com.mapswithme.maps.Framework;
 import com.mapswithme.maps.MwmApplication;
 import com.mapswithme.maps.PrivateVariables;
-import com.mapswithme.maps.ads.MwmNativeAd;
-import com.mapswithme.maps.ads.NativeAdError;
+//import com.mapswithme.maps.ads.MwmNativeAd;
+//import com.mapswithme.maps.ads.NativeAdError;
 import com.mapswithme.maps.analytics.ExternalLibrariesMediator;
 import com.mapswithme.maps.api.ParsedMwmRequest;
 import com.mapswithme.maps.bookmarks.data.BookmarkCategory;
@@ -44,7 +44,7 @@ import com.mapswithme.util.Counters;
 import com.mapswithme.util.CrashlyticsUtils;
 import com.mapswithme.util.PowerManagment;
 import com.mapswithme.util.SharedPropertiesUtils;
-import com.my.tracker.MyTracker;
+//import com.my.tracker.MyTracker;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -893,7 +893,7 @@ public enum Statistics
   {
     if (mEnabled)
     {
-      AppEventsLogger.activateApp(activity.getApplication());
+//      AppEventsLogger.activateApp(activity.getApplication());
       org.alohalytics.Statistics.onStart(activity);
     }
 
@@ -995,10 +995,10 @@ public enum Statistics
                editorMwmParams().add(EventParam.IS_AUTHENTICATED, String.valueOf(OsmOAuth.isAuthorized()))
                                 .add(EventParam.IS_ONLINE, String.valueOf(ConnectionState.isConnected())));
 
-    if (newObject)
-      PushwooshHelper.nativeSendEditorAddObjectTag();
-    else
-      PushwooshHelper.nativeSendEditorEditObjectTag();
+//    if (newObject)
+//      PushwooshHelper.nativeSendEditorAddObjectTag();
+//    else
+//      PushwooshHelper.nativeSendEditorEditObjectTag();
   }
 
   public void trackSubwayEvent(@NonNull String status)
@@ -1126,31 +1126,32 @@ public enum Statistics
     trackEvent(EventName.BM_DOWNLOADED_CATALOGUE_ERROR, params);
   }
 
-  public void trackPPBanner(@NonNull String eventName, @NonNull MwmNativeAd ad, @BannerState int state)
-  {
-    trackEvent(eventName, Statistics.params()
-                                    .add(BANNER, ad.getBannerId())
-                                    .add(PROVIDER, ad.getProvider())
-                                    .add(STATE, String.valueOf(state)));
+//  public void trackPPBanner(@NonNull String eventName, @NonNull MwmNativeAd ad, @BannerState int state)
+//  {
+//    trackEvent(eventName, Statistics.params()
+//                                    .add(BANNER, ad.getBannerId())
+//                                    .add(PROVIDER, ad.getProvider())
+//                                    .add(STATE, String.valueOf(state)));
+//
+//    if (!eventName.equals(PP_BANNER_SHOW) || state == PP_BANNER_STATE_PREVIEW)
+//      MyTracker.trackEvent(eventName);
+//  }
 
-    if (!eventName.equals(PP_BANNER_SHOW) || state == PP_BANNER_STATE_PREVIEW)
-      MyTracker.trackEvent(eventName);
-  }
-
-  public void trackPPBannerError(@NonNull String bannerId, @NonNull String provider,
-                                 @Nullable NativeAdError error, int state)
-  {
-    boolean isAdBlank = error != null && error.getCode() == AdError.NO_FILL_ERROR_CODE;
-    String eventName = isAdBlank ? PP_BANNER_BLANK : PP_BANNER_ERROR;
-    Statistics.ParameterBuilder builder = Statistics.params();
-    builder.add(BANNER, !TextUtils.isEmpty(bannerId) ? bannerId : "N/A")
-           .add(ERROR_CODE, error != null ? String.valueOf(error.getCode()) : "N/A")
-           .add(ERROR_MESSAGE, error != null ? error.getMessage() : "N/A")
-           .add(PROVIDER, provider)
-           .add(STATE, String.valueOf(state));
-    trackEvent(eventName, builder.get());
-    MyTracker.trackEvent(eventName);
-  }
+//  public void trackPPBannerError(@NonNull String bannerId, @NonNull String provider,
+//                                 @Nullable NativeAdError error, int state)
+//  {
+////    boolean isAdBlank = error != null && error.getCode() == AdError.NO_FILL_ERROR_CODE;
+////    String eventName = isAdBlank ? PP_BANNER_BLANK : PP_BANNER_ERROR;
+//    String eventName = PP_BANNER_BLANK;
+//    Statistics.ParameterBuilder builder = Statistics.params();
+//    builder.add(BANNER, !TextUtils.isEmpty(bannerId) ? bannerId : "N/A")
+//           .add(ERROR_CODE, error != null ? String.valueOf(error.getCode()) : "N/A")
+//           .add(ERROR_MESSAGE, error != null ? error.getMessage() : "N/A")
+//           .add(PROVIDER, provider)
+//           .add(STATE, String.valueOf(state));
+//    trackEvent(eventName, builder.get());
+//    MyTracker.trackEvent(eventName);
+//  }
 
   public void trackBookingSearchEvent(@NonNull MapObject mapObject)
   {
@@ -1255,8 +1256,8 @@ public enum Statistics
                                              .add(STATE, state.toString())
                                              .add(COUNT_LOWERCASE, itemsCount));
 
-    if (state == GalleryState.ONLINE)
-      MyTracker.trackEvent(PP_SPONSORED_SHOWN + "_" + type.getProvider());
+//    if (state == GalleryState.ONLINE)
+//      MyTracker.trackEvent(PP_SPONSORED_SHOWN + "_" + type.getProvider());
   }
 
   public void trackGalleryError(@NonNull GalleryType type,
@@ -1291,7 +1292,7 @@ public enum Statistics
   public void trackSearchPromoCategory(@NonNull String eventName, @NonNull String provider)
   {
     trackEvent(eventName, Statistics.params().add(PROVIDER, provider).get());
-    MyTracker.trackEvent(eventName + "_" + provider);
+//    MyTracker.trackEvent(eventName + "_" + provider);
   }
 
   public void trackSettingsToggle(boolean value)

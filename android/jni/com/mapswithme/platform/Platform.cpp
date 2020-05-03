@@ -184,8 +184,8 @@ void Platform::Initialize(JNIEnv * env, jobject functorProcessObject, jstring ap
       "(Ljava/lang/String;[Ljava/lang/String;)V");
   m_sendAppsFlyerTagsMethod = env->GetMethodID(functorProcessClass, "sendAppsFlyerTags",
       "(Ljava/lang/String;[Lcom/mapswithme/util/KeyValue;)V");
-  m_myTrackerTrackMethod = env->GetStaticMethodID(g_myTrackerClazz, "trackEvent",
-      "(Ljava/lang/String;)Z");
+//  m_myTrackerTrackMethod = env->GetStaticMethodID(g_myTrackerClazz, "trackEvent",
+//      "(Ljava/lang/String;)Z");
 
   m_guiThread = std::make_unique<GuiThread>(m_functorProcessObject);
 
@@ -290,15 +290,15 @@ void Platform::SendPushWooshTag(std::string const & tag, std::vector<std::string
 void Platform::SendMarketingEvent(std::string const & tag,
                                   std::map<std::string, std::string> const & params)
 {
-  ASSERT(m_myTrackerTrackMethod, ());
+//  ASSERT(m_myTrackerTrackMethod, ());
 
   JNIEnv * env = jni::GetEnv();
   std::string eventData = tag;
   for (auto const & item : params)
     eventData.append("_" + item.first + "_" + item.second);
 
-  env->CallStaticBooleanMethod(g_myTrackerClazz, m_myTrackerTrackMethod,
-                               jni::TScopedLocalRef(env, jni::ToJavaString(env, eventData)).get());
+//  env->CallStaticBooleanMethod(g_myTrackerClazz, m_myTrackerTrackMethod,
+//                               jni::TScopedLocalRef(env, jni::ToJavaString(env, eventData)).get());
 
   ASSERT(m_functorProcessObject, ());
   ASSERT(m_sendAppsFlyerTagsMethod, ());

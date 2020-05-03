@@ -16,11 +16,11 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.CheckBox;
 
-import com.facebook.CallbackManager;
-import com.facebook.FacebookCallback;
-import com.facebook.FacebookException;
-import com.facebook.login.LoginManager;
-import com.facebook.login.LoginResult;
+//import com.facebook.CallbackManager;
+//import com.facebook.FacebookCallback;
+//import com.facebook.FacebookException;
+//import com.facebook.login.LoginManager;
+//import com.facebook.login.LoginResult;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -44,8 +44,8 @@ public class SocialAuthDialogFragment extends BaseMwmDialogFragment
   @SuppressWarnings("NullableProblems")
   @NonNull
   private GoogleSignInClient mGoogleSignInClient;
-  @NonNull
-  private final CallbackManager mFacebookCallbackManager = CallbackManager.Factory.create();
+//  @NonNull
+//  private final CallbackManager mFacebookCallbackManager = CallbackManager.Factory.create();
   @NonNull
   private final List<TokenHandler> mTokenHandlers = Arrays.asList(
       new FacebookTokenHandler(), new GoogleTokenHandler(), new PhoneTokenHandler());
@@ -68,10 +68,10 @@ public class SocialAuthDialogFragment extends BaseMwmDialogFragment
   };
   @NonNull
   private final View.OnClickListener mFacebookClickListener = v -> {
-    LoginManager lm = LoginManager.getInstance();
-    lm.logInWithReadPermissions(SocialAuthDialogFragment.this,
-                                  Constants.FACEBOOK_PERMISSIONS);
-    lm.registerCallback(mFacebookCallbackManager, new FBCallback(SocialAuthDialogFragment.this));
+//    LoginManager lm = LoginManager.getInstance();
+//    lm.logInWithReadPermissions(SocialAuthDialogFragment.this,
+//                                  Constants.FACEBOOK_PERMISSIONS);
+//    lm.registerCallback(mFacebookCallbackManager, new FBCallback(SocialAuthDialogFragment.this));
   };
   @SuppressWarnings("NullableProblems")
   @NonNull
@@ -198,7 +198,7 @@ public class SocialAuthDialogFragment extends BaseMwmDialogFragment
   public void onActivityResult(int requestCode, int resultCode, Intent data)
   {
     super.onActivityResult(requestCode, resultCode, data);
-    mFacebookCallbackManager.onActivityResult(requestCode, resultCode, data);
+//    mFacebookCallbackManager.onActivityResult(requestCode, resultCode, data);
 
     if (resultCode != Activity.RESULT_OK || data == null)
       return;
@@ -246,47 +246,47 @@ public class SocialAuthDialogFragment extends BaseMwmDialogFragment
     super.onDismiss(dialog);
   }
 
-  private static class FBCallback implements FacebookCallback<LoginResult>
-  {
-    @NonNull
-    private final WeakReference<SocialAuthDialogFragment> mFragmentRef;
-
-    private FBCallback(@NonNull SocialAuthDialogFragment fragment)
-    {
-      mFragmentRef = new WeakReference<>(fragment);
-    }
-
-    @Override
-    public void onSuccess(LoginResult loginResult)
-    {
-      Statistics.INSTANCE.trackUGCExternalAuthSucceed(Statistics.ParamValue.FACEBOOK);
-      LOGGER.d(TAG, "onSuccess");
-    }
-
-    @Override
-    public void onCancel()
-    {
-      LOGGER.w(TAG, "onCancel");
-      sendEmptyResult(Activity.RESULT_CANCELED, Framework.SOCIAL_TOKEN_FACEBOOK,
-                      null, true);
-    }
-
-    @Override
-    public void onError(FacebookException error)
-    {
-      LOGGER.e(TAG, "onError", error);
-      sendEmptyResult(Activity.RESULT_CANCELED, Framework.SOCIAL_TOKEN_FACEBOOK,
-                 error != null ? error.getMessage() : null, false);
-    }
-
-    private void sendEmptyResult(int resultCode, @Framework.AuthTokenType int type,
-                                 @Nullable String error, boolean isCancel)
-    {
-      SocialAuthDialogFragment fragment = mFragmentRef.get();
-      if (fragment == null)
-        return;
-
-      fragment.sendResult(resultCode, null, type, error, isCancel);
-    }
-  }
+//  private static class FBCallback implements FacebookCallback<LoginResult>
+//  {
+//    @NonNull
+//    private final WeakReference<SocialAuthDialogFragment> mFragmentRef;
+//
+//    private FBCallback(@NonNull SocialAuthDialogFragment fragment)
+//    {
+//      mFragmentRef = new WeakReference<>(fragment);
+//    }
+//
+//    @Override
+//    public void onSuccess(LoginResult loginResult)
+//    {
+//      Statistics.INSTANCE.trackUGCExternalAuthSucceed(Statistics.ParamValue.FACEBOOK);
+//      LOGGER.d(TAG, "onSuccess");
+//    }
+//
+//    @Override
+//    public void onCancel()
+//    {
+//      LOGGER.w(TAG, "onCancel");
+//      sendEmptyResult(Activity.RESULT_CANCELED, Framework.SOCIAL_TOKEN_FACEBOOK,
+//                      null, true);
+//    }
+//
+//    @Override
+//    public void onError(FacebookException error)
+//    {
+//      LOGGER.e(TAG, "onError", error);
+//      sendEmptyResult(Activity.RESULT_CANCELED, Framework.SOCIAL_TOKEN_FACEBOOK,
+//                 error != null ? error.getMessage() : null, false);
+//    }
+//
+//    private void sendEmptyResult(int resultCode, @Framework.AuthTokenType int type,
+//                                 @Nullable String error, boolean isCancel)
+//    {
+//      SocialAuthDialogFragment fragment = mFragmentRef.get();
+//      if (fragment == null)
+//        return;
+//
+//      fragment.sendResult(resultCode, null, type, error, isCancel);
+//    }
+//  }
 }

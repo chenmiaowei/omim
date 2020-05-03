@@ -10,9 +10,9 @@ import androidx.annotation.Nullable;
 import androidx.annotation.UiThread;
 import com.appsflyer.AppsFlyerConversionListener;
 import com.appsflyer.AppsFlyerLib;
-import com.crashlytics.android.Crashlytics;
-import com.crashlytics.android.core.CrashlyticsCore;
-import com.crashlytics.android.ndk.CrashlyticsNdk;
+//import com.crashlytics.android.Crashlytics;
+//import com.crashlytics.android.core.CrashlyticsCore;
+//import com.crashlytics.android.ndk.CrashlyticsNdk;
 import com.google.android.gms.ads.identifier.AdvertisingIdClient;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
@@ -21,7 +21,7 @@ import com.mapswithme.maps.Framework;
 import com.mapswithme.maps.MwmApplication;
 import com.mapswithme.maps.PrivateVariables;
 import com.mapswithme.maps.R;
-import com.mapswithme.maps.ads.Banner;
+//import com.mapswithme.maps.ads.Banner;
 import com.mapswithme.util.CrashlyticsUtils;
 import com.mapswithme.util.PermissionsUtils;
 import com.mapswithme.util.Utils;
@@ -30,8 +30,8 @@ import com.mapswithme.util.log.LoggerFactory;
 import com.mopub.common.MoPub;
 import com.mopub.common.SdkConfiguration;
 import com.mopub.common.privacy.PersonalInfoManager;
-import com.my.target.common.MyTargetPrivacy;
-import io.fabric.sdk.android.Fabric;
+//import com.my.target.common.MyTargetPrivacy;
+//import io.fabric.sdk.android.Fabric;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -106,12 +106,12 @@ public class ExternalLibrariesMediator
     if (isCrashlyticsInitialized())
       return;
 
-    Crashlytics core = new Crashlytics
-        .Builder()
-        .core(new CrashlyticsCore.Builder().disabled(!isFabricEnabled()).build())
-        .build();
+//    Crashlytics core = new Crashlytics
+//        .Builder()
+//        .core(new CrashlyticsCore.Builder().disabled(!isFabricEnabled()).build())
+//        .build();
 
-    Fabric.with(mApplication, core, new CrashlyticsNdk());
+//    Fabric.with(mApplication, core, new CrashlyticsNdk());
     nativeInitCrashlytics();
     mCrashlyticsInitialized = true;
   }
@@ -149,7 +149,7 @@ public class ExternalLibrariesMediator
     if (TextUtils.isEmpty(installationId))
       return false;
 
-    Crashlytics.setString("AlohalyticsInstallationId", installationId);
+//    Crashlytics.setString("AlohalyticsInstallationId", installationId);
     return true;
   }
 
@@ -199,11 +199,11 @@ public class ExternalLibrariesMediator
     return mAdvertisingInfo != null ? mAdvertisingInfo.getID() : null;
   }
 
-  public void disableAdProvider(@NonNull Banner.Type type)
-  {
-    Framework.disableAdProvider(type);
-    MyTargetPrivacy.setUserConsent(false);
-  }
+//  public void disableAdProvider(@NonNull Banner.Type type)
+//  {
+//    Framework.disableAdProvider(type);
+////    MyTargetPrivacy.setUserConsent(false);
+//  }
 
   @NonNull
   Application getApplication()
@@ -218,7 +218,7 @@ public class ExternalLibrariesMediator
     if (PermissionsUtils.isLocationGranted(getApplication()))
       return;
 
-    MyTargetPrivacy.setUserConsent(false);
+//    MyTargetPrivacy.setUserConsent(false);
   }
 
   @Nullable

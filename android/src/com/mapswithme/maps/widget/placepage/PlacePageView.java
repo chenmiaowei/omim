@@ -43,7 +43,7 @@ import com.mapswithme.maps.Framework;
 import com.mapswithme.maps.MwmActivity;
 import com.mapswithme.maps.MwmApplication;
 import com.mapswithme.maps.R;
-import com.mapswithme.maps.ads.LocalAdInfo;
+//import com.mapswithme.maps.ads.LocalAdInfo;
 import com.mapswithme.maps.api.ParsedMwmRequest;
 import com.mapswithme.maps.base.Detachable;
 import com.mapswithme.maps.bookmarks.data.Bookmark;
@@ -1206,7 +1206,8 @@ public class PlacePageView extends NestedScrollView
 
   private boolean isNetworkNeeded()
   {
-    return mMapObject != null && (isSponsored() || mMapObject.getBanners() != null);
+    return false;
+//    return mMapObject != null && (isSponsored() || mMapObject.getBanners() != null);
   }
 
   void refreshViews(@NonNull NetworkPolicy policy)
@@ -1452,18 +1453,18 @@ public class PlacePageView extends NestedScrollView
 
   private void refreshLocalAdInfo(@NonNull MapObject mapObject)
   {
-    LocalAdInfo localAdInfo = mapObject.getLocalAdInfo();
-    boolean isLocalAdAvailable = localAdInfo != null && localAdInfo.isAvailable();
-    if (isLocalAdAvailable && !TextUtils.isEmpty(localAdInfo.getUrl()) && !localAdInfo.isHidden())
-    {
-      mTvLocalAd.setText(localAdInfo.isCustomer() ? R.string.view_campaign_button
-                                                  : R.string.create_campaign_button);
-      UiUtils.show(mLocalAd);
-    }
-    else
-    {
-      UiUtils.hide(mLocalAd);
-    }
+//    LocalAdInfo localAdInfo = mapObject.getLocalAdInfo();
+//    boolean isLocalAdAvailable = localAdInfo != null && localAdInfo.isAvailable();
+//    if (isLocalAdAvailable && !TextUtils.isEmpty(localAdInfo.getUrl()) && !localAdInfo.isHidden())
+//    {
+//      mTvLocalAd.setText(localAdInfo.isCustomer() ? R.string.view_campaign_button
+//                                                  : R.string.create_campaign_button);
+//      UiUtils.show(mLocalAd);
+//    }
+//    else
+//    {
+//      UiUtils.hide(mLocalAd);
+//    }
   }
 
   private void refreshOpeningHours(@NonNull MapObject mapObject)
@@ -1787,18 +1788,18 @@ public class PlacePageView extends NestedScrollView
         addPlace();
         break;
       case R.id.ll__local_ad:
-        if (mMapObject != null)
-        {
-          LocalAdInfo localAdInfo = mMapObject.getLocalAdInfo();
-          if (localAdInfo == null)
-            throw new AssertionError("A local ad must be non-null if button is shown!");
-
-          if (!TextUtils.isEmpty(localAdInfo.getUrl()))
-          {
-            Statistics.INSTANCE.trackPPOwnershipButtonClick(mMapObject);
-            Utils.openUrl(getContext(), localAdInfo.getUrl());
-          }
-        }
+//        if (mMapObject != null)
+//        {
+//          LocalAdInfo localAdInfo = mMapObject.getLocalAdInfo();
+//          if (localAdInfo == null)
+//            throw new AssertionError("A local ad must be non-null if button is shown!");
+//
+//          if (!TextUtils.isEmpty(localAdInfo.getUrl()))
+//          {
+//            Statistics.INSTANCE.trackPPOwnershipButtonClick(mMapObject);
+//            Utils.openUrl(getContext(), localAdInfo.getUrl());
+//          }
+//        }
         break;
       case R.id.ll__more:
         onSponsoredClick(false /* book */, true /* isMoreDetails */);
@@ -1817,14 +1818,14 @@ public class PlacePageView extends NestedScrollView
         refreshLatLon(mMapObject);
         break;
       case R.id.ll__place_phone:
-        Utils.callPhone(getContext(), mTvPhone.getText().toString());
-        if (mMapObject != null)
-          Framework.logLocalAdsEvent(Framework.LocalAdsEventType.LOCAL_ADS_EVENT_CLICKED_PHONE, mMapObject);
+//        Utils.callPhone(getContext(), mTvPhone.getText().toString());
+//        if (mMapObject != null)
+//          Framework.logLocalAdsEvent(Framework.LocalAdsEventType.LOCAL_ADS_EVENT_CLICKED_PHONE, mMapObject);
         break;
       case R.id.ll__place_website:
-        Utils.openUrl(getContext(), mTvWebsite.getText().toString());
-        if (mMapObject != null)
-          Framework.logLocalAdsEvent(Framework.LocalAdsEventType.LOCAL_ADS_EVENT_CLICKED_WEBSITE, mMapObject);
+//        Utils.openUrl(getContext(), mTvWebsite.getText().toString());
+//        if (mMapObject != null)
+//          Framework.logLocalAdsEvent(Framework.LocalAdsEventType.LOCAL_ADS_EVENT_CLICKED_WEBSITE, mMapObject);
         break;
       case R.id.ll__place_wiki:
         // TODO: Refactor and use separate getters for Wiki and all other PP meta info too.

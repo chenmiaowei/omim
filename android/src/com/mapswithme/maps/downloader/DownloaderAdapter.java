@@ -38,7 +38,7 @@ import com.mapswithme.util.ThemeUtils;
 import com.mapswithme.util.UiUtils;
 import com.mapswithme.util.statistics.MytargetHelper;
 import com.mapswithme.util.statistics.Statistics;
-import com.my.target.nativeads.banners.NativeAppwallBanner;
+//import com.my.target.nativeads.banners.NativeAppwallBanner;
 import com.timehop.stickyheadersrecyclerview.StickyRecyclerHeadersAdapter;
 import com.timehop.stickyheadersrecyclerview.StickyRecyclerHeadersDecoration;
 
@@ -74,7 +74,7 @@ class DownloaderAdapter extends RecyclerView.Adapter<DownloaderAdapter.ViewHolde
 
   private final List<CountryItem> mItems = new ArrayList<>();
   private final Map<String, CountryItem> mCountryIndex = new HashMap<>();  // Country.id -> Country
-  private final List<NativeAppwallBanner> mAds = new ArrayList<>();
+//  private final List<NativeAppwallBanner> mAds = new ArrayList<>();
 
   private final SparseArray<String> mHeaders = new SparseArray<>();
   private final Stack<PathEntry> mPath = new Stack<>();  // Holds navigation history. The last element is the current level.
@@ -331,8 +331,9 @@ class DownloaderAdapter extends RecyclerView.Adapter<DownloaderAdapter.ViewHolde
       super(createViewHolderFrame(parent, kind));
 
       mKind = kind;
-      mHolder = (kind == TYPE_ADVERTISMENT) ? new AdViewHolder(itemView)
-                                            : new ItemViewHolder(itemView);
+      mHolder = new ItemViewHolder(itemView);
+//      mHolder = (kind == TYPE_ADVERTISMENT) ? new AdViewHolder(itemView)
+//                                            : new ItemViewHolder(itemView);
     }
 
     @SuppressWarnings("unchecked")
@@ -341,7 +342,7 @@ class DownloaderAdapter extends RecyclerView.Adapter<DownloaderAdapter.ViewHolde
       int kind = DownloaderAdapter.this.getItemViewType(position);
       if (kind == TYPE_ADVERTISMENT)
       {
-        mHolder.bind(mAds.get(position - mNearMeCount));
+//        mHolder.bind(mAds.get(position - mNearMeCount));
         return;
       }
 
@@ -646,46 +647,46 @@ class DownloaderAdapter extends RecyclerView.Adapter<DownloaderAdapter.ViewHolde
     }
   }
 
-  private class AdViewHolder extends BaseInnerViewHolder<NativeAppwallBanner>
-  {
-    private final ImageView mIcon;
-    private final TextView mTitle;
-    private final TextView mSubtitle;
-
-    private NativeAppwallBanner mData;
-
-    @NonNull
-    private final View.OnClickListener mClickListener = new View.OnClickListener()
-    {
-      @Override
-      public void onClick(View v)
-      {
-        if (mData != null)
-          if (mMytargetHelper != null)
-            mMytargetHelper.onBannerClick(mData);
-      }
-    };
-
-    AdViewHolder(View frame)
-    {
-      mIcon = (ImageView)frame.findViewById(R.id.downloader_ad_icon);
-      mTitle = (TextView)frame.findViewById(R.id.downloader_ad_title);
-      mSubtitle = (TextView)frame.findViewById(R.id.downloader_ad_subtitle);
-
-      frame.setOnClickListener(mClickListener);
-    }
-
-    @Override
-    void bind(NativeAppwallBanner item)
-    {
-      mData = item;
-      super.bind(item);
-
-      mIcon.setImageBitmap(item.getIcon().getBitmap());
-      mTitle.setText(item.getTitle());
-      mSubtitle.setText(item.getDescription());
-    }
-  }
+//  private class AdViewHolder extends BaseInnerViewHolder<NativeAppwallBanner>
+//  {
+//    private final ImageView mIcon;
+//    private final TextView mTitle;
+//    private final TextView mSubtitle;
+//
+//    private NativeAppwallBanner mData;
+//
+//    @NonNull
+//    private final View.OnClickListener mClickListener = new View.OnClickListener()
+//    {
+//      @Override
+//      public void onClick(View v)
+//      {
+//        if (mData != null)
+//          if (mMytargetHelper != null)
+//            mMytargetHelper.onBannerClick(mData);
+//      }
+//    };
+//
+//    AdViewHolder(View frame)
+//    {
+//      mIcon = (ImageView)frame.findViewById(R.id.downloader_ad_icon);
+//      mTitle = (TextView)frame.findViewById(R.id.downloader_ad_title);
+//      mSubtitle = (TextView)frame.findViewById(R.id.downloader_ad_subtitle);
+//
+//      frame.setOnClickListener(mClickListener);
+//    }
+//
+//    @Override
+//    void bind(NativeAppwallBanner item)
+//    {
+//      mData = item;
+//      super.bind(item);
+//
+//      mIcon.setImageBitmap(item.getIcon().getBitmap());
+//      mTitle.setText(item.getTitle());
+//      mSubtitle.setText(item.getDescription());
+//    }
+//  }
 
   private void collectHeaders()
   {
@@ -771,14 +772,15 @@ class DownloaderAdapter extends RecyclerView.Adapter<DownloaderAdapter.ViewHolde
 
   void clearAdsAndCancelMyTarget()
   {
-    if (mAds.isEmpty())
       return;
+//    if (mAds.isEmpty())
+//      return;
 
-    if (mMytargetHelper != null)
-      mMytargetHelper.cancel();
-
-    clearAdsInternal();
-    mAdsLoaded = false;
+//    if (mMytargetHelper != null)
+//      mMytargetHelper.cancel();
+//
+//    clearAdsInternal();
+//    mAdsLoaded = false;
   }
 
   void resetSearchResultsMode()
@@ -875,7 +877,8 @@ class DownloaderAdapter extends RecyclerView.Adapter<DownloaderAdapter.ViewHolde
 
   private int getAdsCount()
   {
-    return (mShowAds ? mAds.size() : 0);
+      return 0;
+//    return (mShowAds ? mAds.size() : 0);
   }
 
   @Override
@@ -1000,7 +1003,7 @@ class DownloaderAdapter extends RecyclerView.Adapter<DownloaderAdapter.ViewHolde
     if (mAdsLoaded)
     {
       mHeadersDecoration.invalidateHeaders();
-      notifyItemRangeInserted(mNearMeCount, mAds.size());
+//      notifyItemRangeInserted(mNearMeCount, mAds.size());
       return;
     }
 
@@ -1010,11 +1013,11 @@ class DownloaderAdapter extends RecyclerView.Adapter<DownloaderAdapter.ViewHolde
       initMytargetHelper();
   }
 
-  private void handleBannersShow(@NonNull List<NativeAppwallBanner> ads)
-  {
-    if (mMytargetHelper != null)
-      mMytargetHelper.handleBannersShow(ads);
-  }
+//  private void handleBannersShow(@NonNull List<NativeAppwallBanner> ads)
+//  {
+//    if (mMytargetHelper != null)
+//      mMytargetHelper.handleBannersShow(ads);
+//  }
 
   private void initMytargetHelper()
   {
@@ -1038,47 +1041,47 @@ class DownloaderAdapter extends RecyclerView.Adapter<DownloaderAdapter.ViewHolde
       public void onDataReady(@Nullable Void data)
       {
         //noinspection ConstantConditions
-        mMytargetHelper.loadShowcase(new MytargetHelper.Listener<List<NativeAppwallBanner>>()
-        {
-          @Override
-          public void onNoAds()
-          {
-            onNoAdsInternal();
-          }
-
-          @Override
-          public void onDataReady(@Nullable List<NativeAppwallBanner> banners)
-          {
-            mAdsLoading = false;
-            mAdsLoaded = true;
-            mAds.clear();
-
-            if (banners != null)
-            {
-              for (NativeAppwallBanner banner : banners)
-                if (!banner.isAppInstalled())
-                  mAds.add(banner);
-
-              handleBannersShow(banners);
-            }
-
-            mHeadersDecoration.invalidateHeaders();
-            notifyDataSetChanged();
-          }
-        }, mActivity);
+//        mMytargetHelper.loadShowcase(new MytargetHelper.Listener<List<NativeAppwallBanner>>()
+//        {
+//          @Override
+//          public void onNoAds()
+//          {
+//            onNoAdsInternal();
+//          }
+//
+//          @Override
+//          public void onDataReady(@Nullable List<NativeAppwallBanner> banners)
+//          {
+//            mAdsLoading = false;
+//            mAdsLoaded = true;
+//            mAds.clear();
+//
+//            if (banners != null)
+//            {
+//              for (NativeAppwallBanner banner : banners)
+//                if (!banner.isAppInstalled())
+//                  mAds.add(banner);
+//
+//              handleBannersShow(banners);
+//            }
+//
+//            mHeadersDecoration.invalidateHeaders();
+//            notifyDataSetChanged();
+//          }
+//        }, mActivity);
       }
     });
   }
 
   private void clearAdsInternal()
   {
-    int oldSize = mAds.size();
-    mAds.clear();
-    if (oldSize > 0)
-    {
-      mHeadersDecoration.invalidateHeaders();
-      notifyItemRangeRemoved(mNearMeCount, oldSize);
-    }
+//    int oldSize = mAds.size();
+//    mAds.clear();
+//    if (oldSize > 0)
+//    {
+//      mHeadersDecoration.invalidateHeaders();
+//      notifyItemRangeRemoved(mNearMeCount, oldSize);
+//    }
   }
 
   void attach()

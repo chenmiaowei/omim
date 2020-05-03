@@ -1961,11 +1961,11 @@ Java_com_mapswithme_maps_Framework_nativeDeleteSavedRoutePoints()
   frm()->GetRoutingManager().DeleteSavedRoutePoints();
 }
 
-JNIEXPORT jobjectArray JNICALL
-Java_com_mapswithme_maps_Framework_nativeGetSearchBanners(JNIEnv * env, jclass)
-{
-  return usermark_helper::ToBannersArray(env, frm()->GetAdsEngine().GetSearchBanners());
-}
+//JNIEXPORT jobjectArray JNICALL
+//Java_com_mapswithme_maps_Framework_nativeGetSearchBanners(JNIEnv * env, jclass)
+//{
+//  return usermark_helper::ToBannersArray(env, frm()->GetAdsEngine().GetSearchBanners());
+//}
 
 JNIEXPORT void JNICALL
 Java_com_mapswithme_maps_Framework_nativeAuthenticateUser(JNIEnv * env, jclass, jstring socialToken,

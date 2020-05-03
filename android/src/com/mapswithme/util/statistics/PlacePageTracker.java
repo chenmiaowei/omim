@@ -7,7 +7,7 @@ import androidx.annotation.Nullable;
 import android.view.View;
 
 import com.mapswithme.maps.R;
-import com.mapswithme.maps.ads.MwmNativeAd;
+//import com.mapswithme.maps.ads.MwmNativeAd;
 import com.mapswithme.maps.base.Savable;
 import com.mapswithme.maps.bookmarks.data.MapObject;
 import com.mapswithme.maps.taxi.TaxiType;
@@ -70,23 +70,23 @@ public class PlacePageTracker implements Savable<Bundle>
     mPpDetailsOpenedTracked = false;
   }
 
-  public void onBannerDetails(@Nullable MwmNativeAd ad)
-  {
-    if (mBannerDetailsTracked)
-      return;
-
-    Statistics.INSTANCE.trackPPBanner(PP_BANNER_SHOW, ad, PP_BANNER_STATE_DETAILS);
-    mBannerDetailsTracked = true;
-  }
-
-  public void onBannerPreview(@Nullable MwmNativeAd ad)
-  {
-    if (mBannerPreviewTracked)
-      return;
-
-    Statistics.INSTANCE.trackPPBanner(PP_BANNER_SHOW, ad, PP_BANNER_STATE_PREVIEW);
-    mBannerPreviewTracked = true;
-  }
+//  public void onBannerDetails(@Nullable MwmNativeAd ad)
+//  {
+//    if (mBannerDetailsTracked)
+//      return;
+//
+//    Statistics.INSTANCE.trackPPBanner(PP_BANNER_SHOW, ad, PP_BANNER_STATE_DETAILS);
+//    mBannerDetailsTracked = true;
+//  }
+//
+//  public void onBannerPreview(@Nullable MwmNativeAd ad)
+//  {
+//    if (mBannerPreviewTracked)
+//      return;
+//
+//    Statistics.INSTANCE.trackPPBanner(PP_BANNER_SHOW, ad, PP_BANNER_STATE_PREVIEW);
+//    mBannerPreviewTracked = true;
+//  }
 
   public void onDetails()
   {

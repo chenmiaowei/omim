@@ -8,7 +8,7 @@ import android.util.Log;
 import com.mapswithme.util.log.Logger;
 import com.mapswithme.util.log.LoggerFactory;
 import com.mapswithme.util.statistics.AlohaHelper;
-import com.my.tracker.campaign.CampaignReceiver;
+//import com.my.tracker.campaign.CampaignReceiver;
 
 import static com.mapswithme.maps.MwmApplication.backgroundTracker;
 
@@ -56,7 +56,7 @@ public class MultipleTrackerReferrerReceiver extends BroadcastReceiver
     }
     intent.setComponent(null);
     // now send intent to myTracker
-    CampaignReceiver receiver = new CampaignReceiver();
-    receiver.onReceive(context, intent);
+//    CampaignReceiver receiver = new CampaignReceiver();
+//    receiver.onReceive(context, intent);
   }
 }
